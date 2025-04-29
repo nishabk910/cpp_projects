@@ -1,42 +1,52 @@
-//Objective: Write a program to check if a given number is an Armstrong number
-
-//Requirements :
-
-//Use a loop to calculate the sum of cubes of the digits of the number
-
-//Compare the sum with the original number to determine if it's an Armstrong number
-
-
-
-
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-bool isArm(int n) {
-    int original = n;
-    int s = 0;
-    int d;
+bool isArm(int n) 
+{
+    if (n < 0) 
+        return false; 
 
-    while (n > 0) {
-        d = n % 10;       
-        s = s + d * d * d; 
-        n /= 10;        
+    int original = n;
+    int digits = 0;
+    int temp = n;
+
+   
+    while (temp > 0) 
+    {
+        digits++;
+        temp /= 10;
     }
 
-    return s == original;
+    int sum = 0;
+    temp = n;
+
+    
+    while (temp > 0) 
+    {
+        int d = temp % 10;
+        sum = sum + pow(d, digits); 
+        temp /= 10;
+    }
+
+    return sum == original;
 }
-//to see if number is armstrong or not in main function
-int main() {
+
+int main() 
+{
     int num;
+    cout << "enter a number: ";
     cin >> num;
 
-    if (isArm(num)) {
-        cout << "the num you entered is armstrong" << endl;
+    if (isArm(num))
+    {
+        cout << num << " is an armstrong number" << endl;
     }
     else {
-        cout << "the num you have entered is not armstrong" << endl;
+        cout << num << " is not an armstrong number" << endl;
     }
 
     return 0;
 }
+
 
