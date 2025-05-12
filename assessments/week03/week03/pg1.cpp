@@ -1,4 +1,4 @@
-//Problem Statement 2
+//program02
 //You are given a sorted array A of size N containing integers. 
 // Every element in the array appears exactly twice, 
 // except for one element that appears only once. 
