@@ -118,7 +118,7 @@ int returning_book(char name[], int len)
 }
 
 
-int displaysearching( char name[],int size)
+int displaysearching( )
 {
 	int choice;
 	cout << "Search by:\n";
@@ -133,52 +133,46 @@ int displaysearching( char name[],int size)
 int searching(char name[], int size, int choice)
 
 {
-	/*int choice, i;
 
-	cout << "Search by:\n";
-	cout << "0 - Author\n";
-	cout << "1 - Title\n";
-	cout << "2 - Genre\n";
-	cout << "Enter your choice: ";
-	cin >> choice;*/
-
-	/*cout << "Enter index to search (0 to " << numBooks - 1 << "): ";
-	cin >> i;*/
-
-	/*if (i < 0 || i >= numBooks)
-	{
-		return - 1;
-	}*/
-
+	int i
 
 	switch (choice)
 	{
 
 	case 0: // Author
-		for (int i = 0;i < numBooks;i++)
-		if (strcmp(l1[i].author, " ") != 0)
+		for (i = 0;i < numBooks;i++)
+		{
+			if (strcmp(l1[i].author, name) == 0)
 
-			return i;
-
-		else
-
+				return i;
+			else
+				continue;
+		}
 			return -1;
 		break;
 
 	case 1: // Title
-		if (strcmp(l1[i].title, " ") != 0)
+	{
+		for (int i = 0;i < numBooks;i++)
+		if (strcmp(l1[i].title, name) == 0)
 			return i;
-		else
+		else			
+			continue;
+	}
 			return -1;
 		break;
 		
 
 	case 2: // Genre
 
-		if (strcmp(l1[i].genre, " ") != 0)
+	{
+		for (int i = 0;i < numBooks;i++)
+		if (strcmp(l1[i].genre, name) == 0)
 
 			return i;
 		else
+			continue;
+	}
 			return -1;
 		break;
 
