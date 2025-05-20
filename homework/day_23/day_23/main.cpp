@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 #include "inventory.h"
 
 using namespace std;
@@ -19,9 +19,6 @@ void add(prod* p, int* n)
     cout << "category: ";
     cin.getline(p[*n].category, 20);
 
-    cout << "quantity: ";
-    cin >> p[*n].quantity;
-
     cout << "price: ";
     cin >> p[*n].price;
 
@@ -38,7 +35,6 @@ void show(prod* p, int n)
         cout << "\nname: " << p[i].name;
         cout << "\ntype: " << p[i].type;
         cout << "\ncategory: " << p[i].category;
-        cout << "\nquantity: " << p[i].quantity;
         cout << "\nprice: " << p[i].price << "\n";
     }
 }
@@ -61,8 +57,6 @@ void update(prod* p, int n, const char name[])
     {
         if (strcmp(p[i].name, name) == 0)
         {
-            cout << "new quantity: ";
-            cin >> p[i].quantity;
             cout << "new price: ";
             cin >> p[i].price;
             cout << "product updated\n";
@@ -83,7 +77,6 @@ void search(prod* p, int n, const char name[])
             cout << "\nname: " << p[i].name;
             cout << "\ntype: " << p[i].type;
             cout << "\ncategory: " << p[i].category;
-            cout << "\nquantity: " << p[i].quantity;
             cout << "\nprice: " << p[i].price << "\n";
             return;
         }
@@ -123,11 +116,10 @@ int main()
             cout << "enter name: ";
             cin.getline(key, 30);
             search(list, total, key);
-        }
-        else if (ch == 6)
-            break;
+        } 
         else
             cout << "invalid option\n";
+        break;
     }
 
     return 0;
