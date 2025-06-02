@@ -1,0 +1,20 @@
+[INFO] JobChain Execution Log
+----------------------------------------
+[INFO] Successfully loaded 5 jobs.
+[INFO] Selected FIFO Scheduling.
+[DEBUG] Starting FIFO Scheduling...
+[DEBUG] Executing Job ID: 1 | Priority: 2
+[DEBUG] Executing Job ID: 2 | Priority: 3
+[DEBUG] Executing Job ID: 3 | Priority: 1
+[DEBUG] Executing Job ID: 4 | Priority: 5
+[DEBUG] Executing Job ID: 5 | Priority: 4
+[INFO] All jobs executed in 680ms.
+[INFO] Successfully loaded 5 jobs.
+[INFO] Selected Priority Scheduling.
+[DEBUG] Sorted jobs by priority...
+[DEBUG] Executing Job ID: 4 | Priority: 5
+[DEBUG] Executing Job ID: 5 | Priority: 4
+[DEBUG] Executing Job ID: 2 | Priority: 3
+[DEBUG] Executing Job ID: 1 | Priority: 2
+[DEBUG] Executing Job ID: 3 | Priority: 1
+[INFO] All jobs executed in 680ms.

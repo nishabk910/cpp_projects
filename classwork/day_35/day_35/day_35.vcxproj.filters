@@ -18,8 +18,11 @@
     <ClCompile Include="logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="netwk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="job.txt" />
+    <Text Include="jobs.txt" />
   </ItemGroup>
 </Project>

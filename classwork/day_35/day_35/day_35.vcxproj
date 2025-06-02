@@ -128,9 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="logger.cpp" />
+    <ClCompile Include="netwk.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="job.txt" />
+    <Text Include="jobs.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
