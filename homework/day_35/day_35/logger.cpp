@@ -49,10 +49,14 @@ void Logger::log(LogLevel level, const string& message)
     string str;
     switch (level)
     {
-    case INFO: str = "[INFO] "; break;
-    case DEBUG: str = "[DEBUG] "; break;
-    case WARNING: str = "[WARNING] "; break;
-    case ERROR: str = "[ERROR] "; break;
+    case INFO: str = "[INFO] "; 
+        break;
+    case DEBUG: str = "[DEBUG] ";
+        break;
+    case WARNING: str = "[WARNING] ";
+        break;
+    case ERROR: str = "[ERROR] ";
+        break;
     }
     string logMsg = str + message;
     logLines.push_back(logMsg);

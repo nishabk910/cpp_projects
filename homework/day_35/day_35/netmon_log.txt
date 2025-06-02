@@ -1,0 +1,7 @@
+[ERROR] Unknown protocol 'FTP' at line 5
+[INFO] Loaded 4 packets.
+[DEBUG] Packet 1 | TCP | 450 bytes
+[DEBUG] Packet 4 | TCP | 200 bytes
+[DEBUG] Packet 2 | UDP | 980 bytes
+[DEBUG] Packet 3 | ICMP | 1050 bytes
+[WARNING] Packet 3 | ICMP | 1050 bytes

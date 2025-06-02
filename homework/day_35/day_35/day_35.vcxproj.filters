@@ -24,5 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="jobs.txt" />
+    <Text Include="packets.txt" />
   </ItemGroup>
 </Project>
