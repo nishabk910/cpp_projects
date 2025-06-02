@@ -19,173 +19,187 @@ enum LoggingLevel {
 class Logger {
     ofstream fileOut;
 public:
-    Logger(const char* f1) {
+    Logger(const char* f1)
+    {
         try {
             fileOut.open(f1, ios::app);
             if (!fileOut.is_open()) {
                 throw "Error opening file";
             }
         }
-        catch (string s) {
-            cout << s;
+        catch (const char* s) {
+            cout << s << endl;
             exit(0);
         }
     }
 
-    const char* logtostring(int level) {
+    const char* logtostring(int level) 
+    {
         switch (level) {
-        case 0: return "INFO";
-        case 1: return "DEBUG";
-        case 2: return "WARNING";
-        case 3: return "ERROR";
+        case INFO: return "INFO";
+        case DEBUG: return "DEBUG";
+        case WARNING: return "WARNING";
+        case ERROR: return "ERROR";
         default: return "UNKNOWN";
         }
     }
 
-    void log(int level, const char* str) {
+    void log(int level, const char* str)
+    {
         fileOut << "[" << logtostring(level) << "] " << str << endl;
     }
 };
 
-class Job {
-protected:
+class Job
+{
+private:
     int jobId;
     int executionTime;
     int priority;
+
 public:
     void setId(int JobId) {
         this->jobId = JobId;
     }
 
-    int getId() {
+    int getId() const {
         return jobId;
     }
 
-    void setExecTime(int executionTime) {
-        this->executionTime = executionTime;
+    void setExecTime(int execTime) {
+        this->executionTime = execTime;
     }
 
-    int getExecTime() {
+    int getExecTime() const {
         return executionTime;
     }
 
-    void setPriority(int priority) {
-        this->priority = priority;
+    void setPriority(int prio) {
+        this->priority = prio;
     }
 
-    int getPriority() {
+    int getPriority() const
+    {
         return priority;
     }
 
-    void displayJob() {
+    void displayJob() const 
+    {
         cout << "Job ID: " << jobId << endl;
-        cout << "Execution Time: " << executionTime << endl;
+        cout << "Execution Time: " << executionTime << "ms" << endl;
         cout << "Priority: " << priority << endl;
     }
 
-    int executeJob(Logger& ob) {
+    int executeJob(Logger& ob) const
+    {
         auto start = chrono::system_clock::now();
         this_thread::sleep_for(chrono::milliseconds(executionTime));
         auto end = chrono::system_clock::now();
         auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
         char msg[100];
         sprintf(msg, "Executing Job ID: %d | Priority: %d | ExecTime %dms", jobId, priority, duration.count());
-        ob.log(1, msg);
+        ob.log(DEBUG, msg);
         return duration.count();
     }
 };
 
-struct Compare {
-    bool operator()(Job obj1, Job obj2) {
-        return obj1.getPriority() < obj2.getPriority();
-    }
-};
+bool compareByPriority(const Job& a, const Job& b) 
+{
+    return a.getPriority() < b.getPriority();
+}
 
-class Queue {
-protected:
+class Queue
+{
     vector<Job> arr;
     int totalTime;
     bool isPriority;
+
 public:
-    Queue() {
-        Job j;
+    Queue() 
+    {
         totalTime = 0;
-        int val;
         isPriority = false;
+
         ifstream inFile;
         try {
             inFile.open("job.txt", ios::in);
-            if (!inFile.is_open())
+            if (!inFile.is_open()) {
                 throw "File cannot be opened";
+            }
+
+            Job j;
+            int id, execTime, priority;
+            while (inFile >> id >> execTime >> priority) {
+                j.setId(id);
+                j.setExecTime(execTime);
+                j.setPriority(priority);
+                arr.push_back(j);
+            }
         }
         catch (const char* s) {
             cout << s << endl;
             exit(0);
         }
-        while (!inFile.eof()) {
-            inFile >> val;
-            j.setId(val);
-            inFile >> val;
-            j.setExecTime(val);
-            inFile >> val;
-            j.setPriority(val);
-            arr.push_back(j);
-        }
     }
 
     void sortPriority() {
-        sort(arr.begin(), arr.end(), Compare());
+        sort(arr.begin(), arr.end(), compareByPriority);
     }
 
     void executeQueue(Logger& ob) {
-        if (isPriority == true) {
+        if (isPriority)
+        {
             sortPriority();
         }
-        for (auto i : arr) {
-            totalTime += i.executeJob(ob);
+        for (const auto& job : arr)
+        {
+            totalTime += job.executeJob(ob);
         }
     }
 
-    int getTotTime() {
+    int getTotTime() const {
         return totalTime;
     }
 
-    void setPriority(bool isPriority) {
-        this->isPriority = isPriority;
+    void setPriority(bool flag)
+    {
+        isPriority = flag;
     }
 };
 
 int main() {
+    Queue q;
+    Logger l("job_log.txt");
+
     while (1) {
-        cout << "=====Jobchain Scheduler=====" << endl;
-        int opt;
+        cout << "\n===== Jobchain Scheduler =====" << endl;
         cout << "1. Load jobs from file" << endl;
-        cout << "2. Choose scheduling algorithm " << endl;
-        cout << "   a. FIFO(job ID)" << endl;
+        cout << "2. Choose scheduling algorithm" << endl;
+        cout << "   a. FIFO (by Job ID)" << endl;
         cout << "   b. Priority Based" << endl;
         cout << "3. Execute Jobs" << endl;
         cout << "4. Export Log" << endl;
         cout << "5. Exit" << endl;
+
+        int opt;
         cin >> opt;
 
-        char msg[20], alg;
-        Queue q;
-        Logger l("job_log.txt");
-
-        switch (opt) {
+        char msg[100], alg;
+        switch (opt)
+        {
         default:
             break;
         case 1:
-            l.log(INFO, "Successfully loaded Jobs");
+            l.log(INFO, "Successfully loaded jobs from file");
             break;
         case 2:
             cin >> alg;
             if (alg == 'b') {
                 q.setPriority(true);
-                l.log(INFO, "Selected Priority Scheduling");
+                l.log(INFO, "Priority scheduling selected");
             }
             else {
-                l.log(INFO, "Selected FIFO Scheduling");
+                l.log(INFO, "FIFO scheduling selected");
             }
             break;
         case 3:
@@ -200,4 +214,7 @@ int main() {
             exit(0);
         }
     }
+
+    return 0;
 }
+
