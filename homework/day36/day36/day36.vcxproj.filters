@@ -24,22 +24,7 @@
     <ClCompile Include="pg3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pg4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pg5.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="score.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pg6.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pg7.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pg8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
